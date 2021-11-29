@@ -2,7 +2,7 @@
   "name": "nf-touch-bar",
 	"displayName": "Noah Friedman's Touch Bar Extension",
 	"description": "An extension to add shortcuts to the touch bar that I find useful.",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.62.0"
 	},
@@ -10,10 +10,244 @@
 		"Keymaps",
 		"Other"
 	],
-	"activationEvents": [],
+	"activationEvents": ["onStartupFinished"],
 	"main": "./extension.js",
 	"contributes": {
-		"commands": []
+		"commands": [
+			{
+				"category": "NF Touch Bar - Run",
+				"title": "Start",
+				"icon": "icons/runStart.png",
+				"command": "nf-touch-bar.run.start"
+			},
+			{
+				"category": "NF Touch Bar - Run",
+				"title": "Debug",
+				"icon": "icons/runDebug.png",
+				"command": "nf-touch-bar.run.debug"
+			},
+			{
+				"category": "NF Touch Bar - Test",
+				"title": "Start",
+				"icon": "icons/testStart.png",
+				"command": "nf-touch-bar.test.start"
+			},
+			{
+				"category": "NF Touch Bar - Test",
+				"title": "Debug",
+				"icon": "icons/testDebug.png",
+				"command": "nf-touch-bar.test.debug"
+			},
+			{
+				"category": "NF Touch Bar - Test",
+				"title": "Restart",
+				"icon": "icons/testRestart.png",
+				"command": "nf-touch-bar.test.restart"
+			},
+			{
+				"category": "NF Touch Bar - Test",
+				"title": "Stop",
+				"icon": "icons/testStop.png",
+				"command": "nf-touch-bar.test.stop"
+			},
+			{
+				"category": "NF Touch Bar - Terminal",
+				"title": "TogglePanel",
+				"icon": "icons/terminal.png",
+				"command": "nf-touch-bar.terminal.togglePanel"
+			},
+			{
+				"category": "NF Touch Bar - Git",
+				"title": "Toggle Panel",
+				"icon": "icons/gitToggle.png",
+				"command": "nf-touch-bar.git.togglePanel"
+			},
+			{
+				"category": "NF Touch Bar - Git",
+				"title": "Push",
+				"icon": "icons/gitPush.png",
+				"command": "nf-touch-bar.git.push"
+			},
+			{
+				"category": "NF Touch Bar - Git",
+				"title": "Force Push",
+				"icon": "icons/gitForcePush.png",
+				"command": "nf-touch-bar.git.forcePush"
+			},
+			{
+				"category": "NF Touch Bar - Git",
+				"title": "Pull",
+				"icon": "icons/gitPull.png",
+				"command": "nf-touch-bar.git.pull"
+			},
+			{
+				"category": "NF Touch Bar - Folder",
+				"title": "Open...",
+				"icon": "icons/folderOpen.png",
+				"command": "nf-touch-bar.folder.open"
+			},
+			{
+				"category": "NF Touch Bar - Folder",
+				"title": "Open Recent",
+				"icon": "icons/folderRecent.png",
+				"command": "nf-touch-bar.folder.openRecent"
+			},
+			{
+				"category": "NF Touch Bar - Folder",
+				"title": "Close",
+				"icon": "icons/folderClose.png",
+				"command": "nf-touch-bar.folder.close"
+			}
+		],
+		"configuration": {
+			"title": "Noah Friedman's Touch Bar Extension",
+			"properties": {
+				"nf-touch-bar.commands.run.start": {
+					"type": "string",
+					"default": "workbench.action.debug.run",
+					"description": "The command to run when `NF Touch Bar - Run: Start` is pressed."
+				},
+				"nf-touch-bar.commands.run.debug": {
+					"type": "string",
+					"default": "workbench.action.debug.start",
+					"description": "The command to run when `NF Touch Bar - Run: Debug` is pressed."
+				},
+				"nf-touch-bar.commands.test.start": {
+					"type": "string",
+					"default": "testing.runAll",
+					"markdownDescription": "The command to run when `NF Touch Bar - Test: Start` is pressed."
+				},
+				"nf-touch-bar.commands.test.debug": {
+					"type": "string",
+					"default": "testing.debugAll",
+					"markdownDescription": "The command to run when `NF Touch Bar - Test: Debug` is pressed."
+				},
+				"nf-touch-bar.commands.test.restart": {
+					"type": "string",
+					"default": "testing.reRunLastRun",
+					"markdownDescription": "The command to run when `NF Touch Bar - Test: Restart` is pressed."
+				},
+				"nf-touch-bar.commands.test.stop": {
+					"type": "string",
+					"default": "testing.cancelRun",
+					"markdownDescription": "The command to run when `NF Touch Bar - Test: Stop` is pressed."
+				},
+				"nf-touch-bar.commands.terminal.togglePanel": {
+					"type": "string",
+					"default": "workbench.action.terminal.toggleTerminal",
+					"markdownDescription": "The command to run when `NF Touch Bar - Terminal: Toggle Panel` is pressed."
+				},
+				"nf-touch-bar.commands.git.togglePanel": {
+					"type": "string",
+					"default": "workbench.view.scm",
+					"markdownDescription": "The command to run when `NF Touch Bar - Git: Toggle Panel` is pressed."
+				},
+				"nf-touch-bar.commands.git.push": {
+					"type": "string",
+					"default": "git.pushWithTags",
+					"markdownDescription": "The command to run when `NF Touch Bar - Git: Push` is pressed."
+				},
+				"nf-touch-bar.commands.git.forcePush": {
+					"type": "string",
+					"default": "git.pushWithTagsForce",
+					"markdownDescription": "The command to run when `NF Touch Bar - Git: Force Push` is pressed."
+				},
+				"nf-touch-bar.commands.git.pull": {
+					"type": "string",
+					"default": "git.pull",
+					"markdownDescription": "The command to run when `NF Touch Bar - Git: Pull` is pressed."
+				},
+				"nf-touch-bar.commands.folder.open": {
+					"type": "string",
+					"default": "workbench.action.files.openFileFolder",
+					"markdownDescription": "The command to run when `NF Touch Bar - Folder: Open...` is pressed."
+				},
+				"nf-touch-bar.commands.folder.openRecent": {
+					"type": "string",
+					"default": "workbench.action.openRecent",
+					"markdownDescription": "The command to run when `NF Touch Bar - Folder: Open Recent` is pressed."
+				},
+				"nf-touch-bar.commands.folder.close": {
+					"type": "string",
+					"default": "workbench.action.closeFolder",
+					"markdownDescription": "The command to run when `NF Touch Bar - Folder: Close` is pressed."
+				}
+			}
+		},
+		"menus": {
+			"touchBar": [
+				{
+					"command": "nf-touch-bar.run.start",
+					"when": "!inDebugMode && config.nf-touch-bar.commands.run.start != ''",
+					"group": "a@1"
+				},
+				{
+					"command": "nf-touch-bar.run.debug",
+					"when": "!inDebugMode && config.nf-touch-bar.commands.run.debug != ''",
+					"group": "a@2"
+				},
+				{
+					"command": "nf-touch-bar.test.start",
+					"when": "!inDebugMode && testing.hasRunnableTests && !testing.isRunning && config.nf-touch-bar.commands.test.start != ''",
+					"group": "b@1"
+				},
+				{
+					"command": "nf-touch-bar.test.debug",
+					"when": "!inDebugMode && testing.hasDebuggableTests && !testing.isRunning && config.nf-touch-bar.commands.test.debug != ''",
+					"group": "b@2"
+				},
+				{
+					"command": "nf-touch-bar.test.restart",
+					"when": "!inDebugMode && testing.isRunning && config.nf-touch-bar.commands.test.restart != ''",
+					"group": "b@1"
+				},
+				{
+					"command": "nf-touch-bar.test.stop",
+					"when": "!inDebugMode && testing.isRunning && config.nf-touch-bar.commands.test.stop != ''",
+					"group": "b@2"
+				},
+				{
+					"command": "nf-touch-bar.terminal.togglePanel",
+					"when": "!inDebugMode && config.nf-touch-bar.commands.terminal.togglePanel != ''",
+					"group": "c"
+				},
+				{
+					"command": "nf-touch-bar.git.togglePanel",
+					"when": "!inDebugMode && gitOpenRepositoryCount > 0 && config.nf-touch-bar.commands.git.togglePanel != ''",
+					"group": "d@1"
+				},
+				{
+					"command": "nf-touch-bar.git.push",
+					"when": "!inDebugMode && gitOpenRepositoryCount > 0 && nf-touch-bar.showPush && config.nf-touch-bar.commands.git.push != ''",
+					"group": "d@2"
+				},
+				{
+					"command": "nf-touch-bar.git.forcePush",
+					"when": "!inDebugMode && gitOpenRepositoryCount > 0 && nf-touch-bar.showPush && config.nf-touch-bar.commands.git.forcePush != '' && testing.providerCount == 0 || !inDebugMode && gitOpenRepositoryCount > 0 && nf-touch-bar.showPush && config.nf-touch-bar.commands.git.forcePush != '' && !nf-touch-bar.showPull",
+					"group": "d@3"
+				},
+				{
+					"command": "nf-touch-bar.git.pull",
+					"when": "!inDebugMode && gitOpenRepositoryCount > 0 && nf-touch-bar.showPull && config.nf-touch-bar.commands.git.pull != ''",
+					"group": "d@4"
+				},
+				{
+					"command": "nf-touch-bar.folder.open",
+					"when": "!inDebugMode && config.nf-touch-bar.commands.folder.open != '' && testing.providerCount == 0 || !inDebugMode && config.nf-touch-bar.commands.folder.open != '' && !nf-touch-bar.showPush && !nf-touch-bar.showPull",
+					"group": "e@1"
+				},
+				{
+					"command": "nf-touch-bar.folder.openRecent",
+					"when": "!inDebugMode && config.nf-touch-bar.commands.folder.openRecent != '' && testing.providerCount == 0 || !inDebugMode && config.nf-touch-bar.commands.folder.openRecent != '' && !nf-touch-bar.showPush && !nf-touch-bar.showPull",
+					"group": "e@2"
+				},
+				{
+					"command": "nf-touch-bar.folder.close",
+					"when": "!inDebugMode && config.nf-touch-bar.commands.folder.close != '' && workspaceFolderCount > 0",
+					"group": "e@3"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",
